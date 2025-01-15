@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <span>Virtual MarketPlace</span>
+  <span class="spacer"></span>
+
+  <!-- Common buttons for guests -->
+  <a mat-button routerLink="/" *ngIf="showGuestButtons()">Home</a>
+  <a mat-button routerLink="/admin-portal" *ngIf="showGuestButtons()">Admin Portal</a>
+  <a mat-button routerLink="/login" *ngIf="showGuestButtons()">Login</a>
+  <a mat-button routerLink="/register" *ngIf="showGuestButtons()">Register</a>
+
+  <!-- User-specific buttons -->
+  <ng-container *ngIf="showUserButtons()">
+    <a mat-button routerLink="/dashboard">Dashboard</a>
+    <a mat-button routerLink="/create-listing">Create Listing</a>
+    <!-- <button mat-button color="warn" (click)="onLogout()">Logout</button> -->
+  </ng-container>
+
+  <!-- Admin-specific buttons -->
+  <ng-container *ngIf="showAdminButtons()">
+    <a mat-button routerLink="/admin-dashboard">Admin Dashboard</a>
+    <a mat-button routerLink="/manage-users">Manage Users</a>
+    <button mat-button color="warn" (click)="onLogout()">Admin Logout</button>
+  </ng-container>
+</mat-toolbar>
+
+<div class="router-container">
+  <router-outlet></router-outlet>
+</div>

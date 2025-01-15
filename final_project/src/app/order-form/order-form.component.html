@@ -1,0 +1,143 @@
+<div class="order-form">
+  <h2>Order Details</h2>
+
+  <form (ngSubmit)="placeOrder()" #orderForm="ngForm">
+    <!-- Name -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="name"
+        name="name"
+        required
+        aria-label="Name"
+      />
+      <mat-error *ngIf="orderForm.submitted && !name">Name is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Address -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Address</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="address"
+        name="address"
+        required
+        aria-label="Address"
+      ></textarea>
+      <mat-error *ngIf="orderForm.submitted && !address">Address is required.</mat-error>
+    </mat-form-field>
+
+    <!-- Phone Number -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Phone Number</mat-label>
+      <input
+        matInput
+        [(ngModel)]="phoneNumber"
+        name="phoneNumber"
+        required
+        minlength="10"
+        maxlength="10"
+        type="tel"
+        aria-label="Phone Number"
+      />
+      <mat-error *ngIf="orderForm.submitted && (!phoneNumber || phoneNumber.length !== 10)">
+        Phone number must be exactly 10 digits.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Payment Options -->
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Payment Option</mat-label>
+      <mat-select
+        [(ngModel)]="paymentOption"
+        name="paymentOption"
+        required
+        aria-label="Payment Option"
+      >
+        <mat-option value="cash">Cash on Delivery</mat-option>
+        <mat-option value="card">Card Payment</mat-option>
+      </mat-select>
+      <mat-error *ngIf="orderForm.submitted && !paymentOption">
+        Please select a payment option.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Card Details -->
+    <div *ngIf="paymentOption === 'card'" class="card-details">
+      <!-- Card Number -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Card Number</mat-label>
+        <input
+          matInput
+          [(ngModel)]="cardDetails.cardNumber"
+          name="cardNumber"
+          maxlength="16"
+          aria-label="Card Number"
+          required
+        />
+        <mat-error *ngIf="orderForm.submitted && cardDetails.cardNumber.length !== 16">
+          Card number must be 16 digits.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Security Code -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Security Code</mat-label>
+        <input
+          matInput
+          [(ngModel)]="cardDetails.securityCode"
+          name="securityCode"
+          maxlength="3"
+          type="password"
+          aria-label="Security Code"
+          required
+        />
+        <mat-error *ngIf="orderForm.submitted && cardDetails.securityCode.length !== 3">
+          Security code must be 3 digits.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Expiry Month -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Expiry Month</mat-label>
+        <input
+          matInput
+          [(ngModel)]="cardDetails.expiryMonth"
+          name="expiryMonth"
+          aria-label="Expiry Month"
+          required
+        />
+        <mat-error *ngIf="orderForm.submitted && !cardDetails.expiryMonth">
+          Expiry month is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Expiry Year -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Expiry Year</mat-label>
+        <input
+          matInput
+          [(ngModel)]="cardDetails.expiryYear"
+          name="expiryYear"
+          aria-label="Expiry Year"
+          required
+        />
+        <mat-error *ngIf="orderForm.submitted && !cardDetails.expiryYear">
+          Expiry year is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="orderForm.invalid"
+      aria-label="Place Order"
+    >
+      Place Order
+    </button>
+  </form>
+</div>

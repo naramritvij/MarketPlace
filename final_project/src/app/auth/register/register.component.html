@@ -1,0 +1,64 @@
+<mat-card class="register-container">
+  <!-- Card Header -->
+  <mat-card-header>
+    <mat-card-title class="form-title">Create Your Account</mat-card-title>
+    <mat-card-subtitle class="form-subtitle">Join us to explore amazing features</mat-card-subtitle>
+  </mat-card-header>
+
+  <!-- Card Content -->
+  <mat-card-content>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <!-- Name Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="name?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+
+        <!-- Email Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required />
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="email?.hasError('email')">Please enter a valid email address</mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required />
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="password?.hasError('minlength')">
+            Password must be at least 8 characters long
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-container">
+        <mat-error *ngIf="errorMsg">
+          <mat-icon>error_outline</mat-icon>
+          {{ errorMsg }}
+        </mat-error>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">
+          Register
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+
+  <!-- Card Footer -->
+  <mat-card-footer>
+    <p class="login-link">
+      Already have an account? <a (click)="navigateToLogin()">Login here</a>
+    </p>
+
+  </mat-card-footer>
+</mat-card>

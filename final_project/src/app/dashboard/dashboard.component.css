@@ -1,0 +1,167 @@
+/* General Styling */
+.dashboard-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.welcome-message {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333333;
+  margin-left: 1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-container {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Filter Section */
+.filter-card {
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-fields {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-actions {
+  margin-top: 1rem;
+}
+
+.filter-field {
+  flex: 1 1 calc(33.333% - 1rem);
+  min-width: 200px;
+}
+
+/* Listings Section */
+.listings-container h2 {
+  margin-bottom: 1rem;
+  color: #333333;
+  font-size: 1.8rem;
+}
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.listing-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.listing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.sold-listing {
+  opacity: 0.7;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+}
+
+.status-badge.sold {
+  background-color: #e53935; /* Red for sold */
+}
+
+.status-badge.blocked {
+  background-color: #ff9800; /* Orange for blocked */
+}
+
+.sold-tag {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #e53935;
+  font-weight: bold;
+}
+
+.no-listings {
+  color: #666666;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Pagination */
+mat-paginator {
+  margin-top: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+/* Order History Section */
+.order-history {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-history h2 {
+  font-size: 1.8rem;
+  color: #333333;
+  margin-bottom: 1.5rem;
+}
+
+.order-card {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.order-card mat-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.order-card mat-card-content p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #555555;
+}
+
+.order-card:last-child {
+  margin-bottom: 0;
+}
+
+.no-orders {
+  font-size: 1.2rem;
+  color: #777777;
+  text-align: center;
+}

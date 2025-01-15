@@ -1,0 +1,191 @@
+/* Dashboard Container */
+.dashboard-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Header */
+h2 {
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+/* Subheading or Description */
+p {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Table Title */
+.table-title {
+  font-size: 24px;
+  color: #34495e;
+  margin: 20px 0;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #2980b9;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #1e6091;
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+button.delete-button {
+  background-color: #e74c3c;
+}
+
+button.delete-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* Material Table Styling */
+mat-table {
+  width: 100%;
+  margin-top: 20px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+mat-header-row {
+  background-color: #f4f6f7;
+  font-weight: bold;
+}
+
+mat-header-cell {
+  font-size: 16px;
+  color: #2c3e50;
+  padding: 14px 10px;
+  text-align: left;
+  border-bottom: 2px solid #dfe6e9;
+}
+
+mat-row {
+  transition: background-color 0.3s;
+}
+
+mat-row:hover {
+  background-color: #ecf0f1;
+}
+
+mat-cell {
+  font-size: 14px;
+  color: #2d3436;
+  padding: 12px 10px;
+  border-bottom: 1px solid #dfe6e9;
+  text-align: left;
+}
+
+/* Empty State */
+.empty-state {
+  font-size: 18px;
+  color: #95a5a6;
+  margin-top: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .table-title {
+    font-size: 20px;
+  }
+
+  mat-header-cell,
+  mat-cell {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
+
+/* Advanced Styling for Tables */
+.mat-elevation-z8 {
+  border: 1px solid #dcdde1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-header-cell:first-child,
+.mat-cell:first-child {
+  border-left: none;
+}
+
+.mat-header-cell:last-child,
+.mat-cell:last-child {
+  border-right: none;
+}
+
+/* Delete Confirmation Styling (Optional Modal Look) */
+.confirmation-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dcdde1;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.confirmation-popup h3 {
+  font-size: 20px;
+  color: #34495e;
+  margin-bottom: 15px;
+}
+
+.confirmation-popup button {
+  margin: 10px;
+}
+
+/* Danger Alert for Confirmation */
+.alert-text {
+  font-size: 16px;
+  color: #e74c3c;
+  margin: 10px 0;
+}

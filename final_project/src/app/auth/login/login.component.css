@@ -1,0 +1,75 @@
+.login-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+  text-align: center;
+}
+
+.form-title {
+  font-size: 1.8rem; /* Increased for better visibility */
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-subtitle {
+  font-size: 1.1rem; /* Slightly larger subtitle */
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.error-message mat-icon {
+  margin-right: 0.5rem;
+}
+
+.forgot-password-link {
+  text-align: right;
+  margin-top: 0.5rem; /* Adjusted to ensure better spacing */
+  margin-bottom: 1rem;
+  position: relative; /* Ensure no overlapping issues */
+  z-index: 10; /* Higher z-index to make sure it’s clickable */
+}
+
+.forgot-password-link a {
+  color: #3f51b5;
+  text-decoration: none;
+  font-size: 0.95rem; /* Slightly larger for better readability */
+  font-weight: 600;
+  cursor: pointer; /* Ensures pointer style when hovering */
+}
+
+.forgot-password-link a:hover {
+  text-decoration: underline;
+  color: #1e88e5; /* Slightly darker hover color */
+}
+
+.button-container {
+  margin-top: 1.5rem;
+}
+
+.button-container button {
+  width: 100%; /* Ensure the button is full-width */
+  padding: 0.8rem; /* Better button padding */
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}

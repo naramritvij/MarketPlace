@@ -1,0 +1,24 @@
+.user-management {
+  padding: 16px;
+}
+
+.user-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+mat-form-field {
+  flex: 1 1 calc(33% - 16px);
+  min-width: 200px;
+}
+
+table {
+  width: 100%;
+}
+
+button {
+  margin: 4px;
+}
+

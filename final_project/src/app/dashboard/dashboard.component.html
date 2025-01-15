@@ -1,0 +1,126 @@
+<mat-toolbar color="primary" class="dashboard-toolbar">
+  <span class="welcome-message">Welcome, {{ user?.name }}!</span>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" (click)="navigateToCreateListing()">Create Listing</button>
+  <button mat-raised-button color="primary" (click)="navigateToEditProfile()">Edit Profile</button>
+  <!-- Logout Button -->
+  <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
+</mat-toolbar>
+
+<div class="dashboard-container">
+  <!-- Filter Section -->
+  <mat-card class="filter-card">
+    <mat-card-title>Filter Listings</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="filterForm" class="filter-form">
+        <div class="filter-fields">
+          <!-- Category Filter -->
+          <mat-form-field class="filter-field">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Price Range Filter -->
+          <mat-form-field class="filter-field">
+            <mat-label>Min Price</mat-label>
+            <input matInput type="number" formControlName="minPrice" />
+          </mat-form-field>
+
+          <mat-form-field class="filter-field">
+            <mat-label>Max Price</mat-label>
+            <input matInput type="number" formControlName="maxPrice" />
+          </mat-form-field>
+        </div>
+        <!-- Apply Filters Button -->
+        <div class="filter-actions">
+          <button mat-raised-button color="primary" type="button" (click)="applyFilters()">Apply Filters</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Listings Section -->
+  <div class="listings-container">
+    <h2>All Listings</h2>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <!-- No Listings Message -->
+    <div *ngIf="!errorMessage && paginatedListings.length === 0" class="no-listings">
+      <p>No listings available. Create your first listing now!</p>
+    </div>
+
+    <!-- Listings Grid -->
+    <div *ngIf="paginatedListings.length > 0" class="listings-grid">
+      <mat-card
+        *ngFor="let listing of paginatedListings"
+        class="listing-card"
+        [ngClass]="{ 'sold-listing': listing.sold, 'blocked-listing': listing.blocked }"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ listing.name || 'Unnamed Product' }}</mat-card-title>
+          <mat-card-subtitle>Created by: {{ listing.createdBy || 'Unknown' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Price:</strong> {{ formatPrice(listing.price) }}</p>
+          <p><strong>Type:</strong> {{ listing.type || 'N/A' }}</p>
+          <p><strong>Category:</strong> {{ listing.category || 'N/A' }}</p>
+          <p>
+            <strong>Description:</strong>
+            {{ formatText(listing.description || 'No description available.') }}
+          </p>
+          <div *ngIf="listing.sold" class="status-badge sold">Sold</div>
+          <div *ngIf="listing.blocked" class="status-badge blocked">Owner is Blocked</div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="listing.sold || listing.blocked"
+            (click)="viewListingDetails(listing)"
+          >
+            View Details
+          </button>
+          <div *ngIf="listing.createdBy === user?.name" class="owner-actions">
+            <button mat-raised-button color="accent" (click)="editListing(listing)">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteListing(listing._id)">Delete</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [length]="filteredListings.length"
+    [pageSize]="6"
+    [pageSizeOptions]="[6]"
+    (page)="onPageChange($event)"
+    aria-label="Pagination"
+  ></mat-paginator>
+</div>
+
+<!-- Order History Section -->
+<div class="order-history">
+  <h2>Your Order History</h2>
+  <div *ngIf="userOrders.length > 0">
+    <mat-card *ngFor="let order of userOrders" class="order-card">
+      <mat-card-title>{{ order.listingName || 'Unnamed Product' }}</mat-card-title>
+      <mat-card-content>
+        <p><strong>Price:</strong> {{ formatPrice(order.price) }}</p>
+        <p><strong>Payment Method:</strong> {{ order.paymentMethod || 'N/A' }}</p>
+        <p><strong>Shipping Address:</strong> {{ order.address || 'N/A' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="userOrders.length === 0">
+    <p>You have not purchased anything yet.</p>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+/* Container */
+.portal-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h2 {
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Description */
+p {
+  font-size: 16px;
+  color: #555555;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.portal-button {
+  flex: 1;
+  padding: 12px 15px;
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.portal-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button-group {
+    flex-direction: column;
+  }
+
+  .portal-button {
+    margin: 10px 0;
+  }
+}

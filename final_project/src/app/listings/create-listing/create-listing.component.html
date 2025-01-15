@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-title>{{ editing ? 'Edit Listing' : 'Create a New Listing' }}</mat-card-title>
+  <mat-card-content>
+    <p class="welcome-message">
+      Welcome, {{ userName }}! {{ editing ? 'You can edit the listing below.' : 'Now you can create a listing.' }}
+    </p>
+
+    <form [formGroup]="listingForm" (ngSubmit)="onSubmit()">
+      <!-- Product Name -->
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Product Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter the product name" />
+        <mat-error *ngIf="listingForm.get('name')?.invalid && listingForm.get('name')?.touched">
+          Product Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Price -->
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" placeholder="Enter the price" />
+        <mat-error *ngIf="listingForm.get('price')?.invalid && listingForm.get('price')?.touched">
+          Price must be a positive number.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description (Quill Rich Text Editor) -->
+      <div class="quill-container">
+        <quill-editor
+          formControlName="description"
+          [styles]="{ height: '200px' }"
+          placeholder="Enter the product description"
+          theme="snow"
+        ></quill-editor>
+        <mat-error *ngIf="listingForm.get('description')?.invalid && listingForm.get('description')?.touched">
+          Description is required.
+        </mat-error>
+      </div>
+
+      <!-- Type -->
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Type of Product/Listing</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="physical">Physical</mat-option>
+          <mat-option value="digital">Digital</mat-option>
+          <mat-option value="service">Service</mat-option>
+        </mat-select>
+        <mat-error *ngIf="listingForm.get('type')?.invalid && listingForm.get('type')?.touched">
+          Type of Product/Listing is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Category -->
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Category</mat-label>
+        <input matInput formControlName="category" placeholder="Enter the category" />
+        <mat-error *ngIf="listingForm.get('category')?.invalid && listingForm.get('category')?.touched">
+          Category is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Error/Success Messages -->
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="!listingForm.valid">
+        {{ editing ? 'Edit This Listing' : 'Create Listing' }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

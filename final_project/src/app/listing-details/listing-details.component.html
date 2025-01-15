@@ -1,0 +1,137 @@
+<mat-card>
+  <mat-card-title>Listing Details</mat-card-title>
+  <mat-card-content *ngIf="listing">
+    <p><strong>Name:</strong> {{ listing.name }}</p>
+    <p><strong>Price:</strong> {{ listing.price | currency }}</p>
+    <p><strong>Type:</strong> {{ listing.type }}</p>
+    <p><strong>Category:</strong> {{ listing.category }}</p>
+    <p><strong>Description:</strong> {{ listing.description }}</p>
+  </mat-card-content>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- Back to Dashboard Button -->
+  <button mat-raised-button color="primary" (click)="goBack()">Back to Dashboard</button>
+
+  <!-- Buy Now Button: Hidden if the user is the creator of the listing -->
+  <button
+    *ngIf="!isCreator"
+    mat-raised-button
+    color="primary"
+    (click)="redirectToOrder()"
+    aria-label="Buy this listing"
+  >
+    Buy Now
+  </button>
+  <p *ngIf="isCreator" class="creator-message">
+    You cannot buy your own listing.
+  </p>
+</mat-card>
+
+<!-- Reviews Section -->
+<div class="review-section">
+  <h3>Reviews</h3>
+
+  <!-- Display Loading or Empty Message -->
+  <p *ngIf="isLoading">Loading reviews...</p>
+  <p *ngIf="!isLoading && reviews.length === 0">No reviews yet. Be the first to write one!</p>
+
+  <!-- Display Existing Reviews -->
+  <div *ngFor="let review of reviews" class="review">
+    <mat-card class="review-card">
+      <mat-card-content>
+        <p>
+          <strong>{{ review.userName }}</strong>: {{ review.comment }}
+        </p>
+        <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+
+        <!-- Reply Section -->
+        <div *ngFor="let reply of review.replies" class="reply-container">
+          <mat-card class="reply-card">
+            <p>
+              <strong>{{ reply.replyBy }} (Owner):</strong> {{ reply.replyText }}
+            </p>
+          </mat-card>
+        </div>
+
+        <!-- Reply Form for Listing Creator -->
+        <div *ngIf="isCreator" class="reply-form">
+          <mat-form-field appearance="fill" class="form-field">
+            <textarea
+              matInput
+              [(ngModel)]="review.replyText"
+              placeholder="Write your reply here..."
+              name="replyText"
+              aria-label="Write your reply"
+            ></textarea>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="replyToReview(review._id, review.replyText)"
+            aria-label="Submit reply"
+          >
+            Reply
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Add Review Form -->
+  <div *ngIf="isAuthenticated" class="add-review-form">
+    <h4>Add a Review</h4>
+    <form (ngSubmit)="addReview()" #reviewForm="ngForm">
+      <!-- Review Textarea -->
+      <mat-form-field appearance="fill" class="form-field">
+        <textarea
+          matInput
+          [(ngModel)]="newReview.comment"
+          placeholder="Write your review..."
+          name="reviewComment"
+          required
+          minlength="5"
+          aria-label="Write your review"
+          #reviewComment="ngModel"
+        ></textarea>
+        <mat-error *ngIf="reviewComment.invalid && reviewComment.touched">
+          A review is required (minimum 5 characters).
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Rating Dropdown -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-select
+          [(ngModel)]="newReview.rating"
+          name="reviewRating"
+          required
+          aria-label="Select your rating"
+          #reviewRating="ngModel"
+        >
+          <mat-option [value]="i" *ngFor="let i of [1, 2, 3, 4, 5]">
+            Rating: {{ i }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="reviewRating.invalid && reviewRating.touched">
+          A rating is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="reviewForm.invalid"
+        aria-label="Submit your review"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <!-- Message when user is not authenticated -->
+  <div *ngIf="!isAuthenticated" class="auth-message">
+    <p>You need to be logged in to write a review.</p>
+  </div>
+</div>

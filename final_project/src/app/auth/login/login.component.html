@@ -1,0 +1,62 @@
+<form [formGroup]="loginForm" class="login-form" (ngSubmit)="onLogin()">
+  <div class="form-container">
+    <!-- Header -->
+    <h2 class="form-title">Welcome Back</h2>
+    <p class="form-subtitle">Log in to access your account</p>
+
+    <!-- Email Field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="Enter your email"
+        formControlName="email"
+        required
+        type="email"
+      />
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        Please enter a valid email.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password Field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="'password'"
+        placeholder="Enter your password"
+        formControlName="password"
+        required
+      />
+      <mat-icon matSuffix>lock</mat-icon>
+      <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        Password must be at least 8 characters long.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      <mat-icon>error_outline</mat-icon>
+      {{ errorMessage }}
+    </div>
+
+    <!-- Forgot Password Link -->
+    <div class="forgot-password-link">
+      <a routerLink="/forgot-password">Forgot your password?</a>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="button-container">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!loginForm.valid"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+</form>
